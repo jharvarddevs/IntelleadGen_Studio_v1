@@ -150,8 +150,8 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               <li className="flex items-start space-x-2">
                 <MapPin className="w-5 h-5 text-white mt-0.5 flex-shrink-0" />
                 <div className="flex flex-col">
-                  <span>1500 Market St, 12th Floor</span>
-                  <span>Philadelphia, PA 19102</span>
+                  <span className="font-semibold text-white">Serving the Philadelphia Region</span>
+                  <span className="text-xs text-primary-400">Center City • Horsham • Main Line</span>
                 </div>
               </li>
             </ul>

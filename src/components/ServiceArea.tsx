@@ -4,9 +4,9 @@ import { Section, SectionHeader } from './Section';
 
 export const ServiceArea: React.FC = () => {
     const mainArea = {
-        name: 'Philadelphia, PA',
-        address: '1500 Market St, Philadelphia, PA 19102',
-        description: 'Our primary headquarters serving the Greater Philadelphia legal and medical community.'
+        name: 'Greater Philadelphia Area',
+        address: 'Serving Center City, Horsham, and surrounding regions',
+        description: 'Boutique service model specializing in legal and medical AI systems across the tri-state area.'
     };
 
     const secondaryAreas = [
@@ -33,14 +33,14 @@ export const ServiceArea: React.FC = () => {
                     <div className="relative bg-white rounded-2xl shadow-xl border border-primary-200 overflow-hidden">
                         <div className="aspect-video w-full bg-primary-50 grayscale hover:grayscale-0 transition-all duration-700">
                             <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3058.4239855855!2d-75.1664402234057!3d39.95201177151754!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c6c62ec03c09dd%3A0x6a9fdc2f5dcca0!2s1500%20Market%20St%2C%20Philadelphia%2C%20PA%2019102!5e0!3m2!1sen!2sus!4v1706115000000!5m2!1sen!2sus"
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3058.4239855855!2d-75.16644!3d39.9520!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c6c62ec03c09dd%3A0x6a9fdc2f5dcca0!2sCenter%20City%2C%20Philadelphia%2C%20PA!5e0!3m2!1sen!2sus!4v1706115000000!5m2!1sen!2sus"
                                 width="100%"
                                 height="100%"
                                 style={{ border: 0 }}
                                 allowFullScreen={true}
                                 loading="lazy"
                                 referrerPolicy="no-referrer-when-downgrade"
-                                title="IntelleadGen Studio Philadelphia Office"
+                                title="IntelleadGen Studio - Serving Greater Philadelphia"
                                 className="opacity-80 hover:opacity-100 transition-opacity duration-300"
                             ></iframe>
                         </div>
@@ -55,7 +55,7 @@ export const ServiceArea: React.FC = () => {
                                     <p className="text-secondary-600 text-sm mb-4">{mainArea.address}</p>
                                     <div className="flex items-center space-x-2 text-primary-600 font-semibold text-sm group/link cursor-pointer">
                                         <Navigation className="w-4 h-4" />
-                                        <span>Get Directions</span>
+                                        <span>View Service Coverage</span>
                                         <ExternalLink className="w-4 h-4 opacity-0 group-hover/link:opacity-100 transition-opacity translate-x-1" />
                                     </div>
                                 </div>

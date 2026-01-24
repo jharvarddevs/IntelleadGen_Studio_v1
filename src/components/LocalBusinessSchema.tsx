@@ -13,7 +13,6 @@ export const LocalBusinessSchema: React.FC = () => {
         priceRange: '$$$',
         address: {
             '@type': 'PostalAddress',
-            streetAddress: '1500 Market Street, 12th Floor',
             addressLocality: 'Philadelphia',
             addressRegion: 'PA',
             postalCode: '19102',
@@ -21,8 +20,8 @@ export const LocalBusinessSchema: React.FC = () => {
         },
         geo: {
             '@type': 'GeoCoordinates',
-            latitude: 39.9522,
-            longitude: -75.1639,
+            latitude: 39.9526,
+            longitude: -75.1652,
         },
         areaServed: [
             {
