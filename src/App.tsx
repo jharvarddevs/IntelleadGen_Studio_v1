@@ -110,7 +110,7 @@ function App() {
         <EliteTrustBar />
         <Navigation currentPage={currentPage} onNavigate={handleNavigate} />
       </div>
-      <main className="pt-[104px] md:pt-[120px]">{renderPage()}</main>
+      <main className="pt-[104px] md:pt-[128px]">{renderPage()}</main>
       <Footer onNavigate={handleNavigate} />
     </div>
   );
