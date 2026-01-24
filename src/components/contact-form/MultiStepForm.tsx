@@ -153,37 +153,43 @@ export const MultiStepForm: React.FC = () => {
         biggestPainPoint: formData.biggestPainPoint,
       });
 
-      const { error: submitError } = await supabase.from('contact_submissions').insert({
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone || null,
-        company_name: formData.companyName || null,
-        industry: formData.industry,
-        company_size: formData.companySize,
-        annual_revenue: formData.annualRevenue,
-        budget_range: formData.budgetRange,
-        timeline: formData.timeline,
-        current_website: formData.currentWebsite || null,
-        services_interested: formData.servicesInterested,
-        biggest_pain_point: formData.biggestPainPoint || null,
-        how_heard: formData.howHeard || null,
-        interested_in_platform: formData.interestedInPlatform,
-        lead_score: leadScoreData.score,
-        lead_status: leadScoreData.status,
-        form_version: 'v2-multistep',
-        completion_time_seconds: completionTime,
-        form_started_at: new Date(formStartTime).toISOString(),
-        business: `${formData.industry} - ${formData.servicesInterested.join(', ')}`,
-      });
+      const { error: submitError } = await supabase.from('contact_submissions').insert([
+        {
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone || null,
+          company_name: formData.companyName || null,
+          industry: formData.industry,
+          company_size: formData.companySize,
+          annual_revenue: formData.annualRevenue,
+          budget_range: formData.budgetRange,
+          timeline: formData.timeline,
+          current_website: formData.currentWebsite || null,
+          services_interested: formData.servicesInterested,
+          biggest_pain_point: formData.biggestPainPoint || null,
+          how_heard: formData.howHeard || null,
+          interested_in_platform: formData.interestedInPlatform,
+          lead_score: leadScoreData.score,
+          lead_status: leadScoreData.status,
+          form_version: 'v2-multistep',
+          completion_time_seconds: completionTime,
+          form_started_at: new Date(formStartTime).toISOString(),
+          business: `${formData.industry} - ${formData.servicesInterested.join(', ')}`,
+        }
+      ]);
 
-      if (submitError) throw submitError;
+      if (submitError) {
+        console.error('Supabase Error:', submitError);
+        throw submitError;
+      }
 
       setSubmitted(true);
       localStorage.removeItem('contactFormData');
       localStorage.removeItem('contactFormStep');
-    } catch (err) {
+    } catch (err: any) {
       console.error('Submission error:', err);
-      setError('Something went wrong. Please try again or email us at hello@intelleadgen.io');
+      const errorMessage = err?.message || err?.details || 'Something went wrong.';
+      setError(`${errorMessage} Please try again or email us at hello@intelleadgen.io`);
     } finally {
       setLoading(false);
     }
