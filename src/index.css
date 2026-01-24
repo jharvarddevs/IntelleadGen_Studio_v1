@@ -170,18 +170,22 @@
 
   .animate-float {
     animation: float 3s ease-in-out infinite;
+    will-change: transform;
   }
 
   .animate-float-slow {
     animation: float 4s ease-in-out infinite;
+    will-change: transform;
   }
 
   .animate-float-delayed {
     animation: float 3.5s ease-in-out infinite 0.5s;
+    will-change: transform;
   }
 
   .animate-float-slow-delayed {
     animation: float 5s ease-in-out infinite 1s;
+    will-change: transform;
   }
 
   .shimmer-button {

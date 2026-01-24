@@ -14,20 +14,23 @@ import { SEO } from './components/SEO';
 import { LocalBusinessSchema } from './components/LocalBusinessSchema';
 import { EliteTrustBar } from './components/EliteTrustBar';
 import { getServiceBySlug } from './lib/servicesData';
+import { trackEvent } from './lib/supabase';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
 
   useEffect(() => {
-    const hash = window.location.hash.slice(1);
+    const hash = window.location.hash.slice(1) || 'home';
     if (hash) {
       setCurrentPage(hash);
+      trackEvent('page_view', window.location.pathname, { page: hash });
     }
   }, []);
 
   const handleNavigate = (page: string) => {
     setCurrentPage(page);
     window.location.hash = page;
+    trackEvent('navigation', window.location.pathname, { to: page });
   };
 
   const renderPage = () => {

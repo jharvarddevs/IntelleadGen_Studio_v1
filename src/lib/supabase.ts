@@ -37,3 +37,15 @@ export const submitContactForm = async (data: ContactSubmission) => {
 
   return result;
 };
+
+export const trackEvent = async (eventName: string, pagePath: string, metadata: object = {}) => {
+  try {
+    const { data, error } = await supabase.functions.invoke('track-event', {
+      body: { event_name: eventName, page_path: pagePath, metadata },
+    });
+    if (error) throw error;
+    return data;
+  } catch (err) {
+    console.error('Failed to track event:', err);
+  }
+};
