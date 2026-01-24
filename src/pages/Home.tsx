@@ -11,6 +11,7 @@ import { SEO } from '../components/SEO';
 import { Zap, TrendingUp, Palette, Clock, Award, Users, ArrowRight, CheckCircle, MessageCircle, ExternalLink, Sparkles } from 'lucide-react';
 import { GEOValidator } from '../components/GEOValidator';
 import { HPAPhaseShift } from '../components/HPAPhaseShift';
+import { ServiceArea } from '../components/ServiceArea';
 
 export const Home: React.FC = () => {
   return (
@@ -188,8 +189,8 @@ export const Home: React.FC = () => {
                 website that works as hard as you do.
               </p>
               <p className="text-lg text-secondary-600 mb-8 leading-relaxed">
-                We work with medical clinics, law firms, real estate brokers, contractors, medspas,
-                coaches, and personal brands who want smart systems without the complexity.
+                We work with Center City law firms, Montgomery County medical clinics (including Horsham),
+                and high-ticket service businesses across the East Coast who want smart systems without the complexity.
               </p>
               <Button size="lg" href="#contact">
                 Let's Talk About Your Business
@@ -220,6 +221,8 @@ export const Home: React.FC = () => {
             </div>
           </div>
         </Section>
+
+        <ServiceArea />
 
         <Section background="dark" id="roadmap">
           <SectionHeader

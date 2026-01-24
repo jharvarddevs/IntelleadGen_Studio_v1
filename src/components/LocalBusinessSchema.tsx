@@ -13,7 +13,7 @@ export const LocalBusinessSchema: React.FC = () => {
         priceRange: '$$$',
         address: {
             '@type': 'PostalAddress',
-            streetAddress: 'Philadelphia Region',
+            streetAddress: '1500 Market Street, 12th Floor',
             addressLocality: 'Philadelphia',
             addressRegion: 'PA',
             postalCode: '19102',
@@ -21,9 +21,31 @@ export const LocalBusinessSchema: React.FC = () => {
         },
         geo: {
             '@type': 'GeoCoordinates',
-            latitude: 39.9526,
-            longitude: -75.1652,
+            latitude: 39.9522,
+            longitude: -75.1639,
         },
+        areaServed: [
+            {
+                '@type': 'City',
+                name: 'Philadelphia',
+                sameAs: 'https://www.wikidata.org/wiki/Q1345'
+            },
+            {
+                '@type': 'City',
+                name: 'Horsham',
+                sameAs: 'https://www.wikidata.org/wiki/Q5905187'
+            },
+            {
+                '@type': 'City',
+                name: 'New York',
+                sameAs: 'https://www.wikidata.org/wiki/Q60'
+            },
+            {
+                '@type': 'City',
+                name: 'Miami',
+                sameAs: 'https://www.wikidata.org/wiki/Q12142'
+            }
+        ],
         openingHoursSpecification: [
             {
                 '@type': 'OpeningHoursSpecification',
@@ -36,19 +58,29 @@ export const LocalBusinessSchema: React.FC = () => {
             'https://linkedin.com/company/intelleadgen',
             'https://twitter.com/intelleadgen'
         ],
-        description: 'Premier AI Automation and Web Development for Law Firms, Medical Offices, and High-Ticket Service Businesses.',
-        services: [
-            {
-                '@type': 'Service',
-                name: 'AI Automation for Law Firms',
-                description: 'Automated lead follow-up and appointment scheduling for personal injury and family law firms.'
-            },
-            {
-                '@type': 'Service',
-                name: 'Medical Marketing Automation',
-                description: 'Patient acquisition and retention systems for MedSpas and medical clinics.'
-            }
-        ]
+        description: 'Elite AI Automation and High-Performance Web Development for Philadelphia-based Law Firms, Medical Offices, and High-Ticket Service Businesses.',
+        hasOfferCatalog: {
+            '@type': 'OfferCatalog',
+            name: 'Local SEO & AI Services',
+            itemListElement: [
+                {
+                    '@type': 'Offer',
+                    itemOffered: {
+                        '@type': 'Service',
+                        name: 'Local SEO & Map Pack Optimization',
+                        description: 'Dominate Philadelphia local search results and the Google Map Pack.'
+                    }
+                },
+                {
+                    '@type': 'Offer',
+                    itemOffered: {
+                        '@type': 'Service',
+                        name: 'AI Lead Follow-up Systems',
+                        description: 'Automated 24/7 lead nurturing for medical and legal practices.'
+                    }
+                }
+            ]
+        }
     };
 
     return (

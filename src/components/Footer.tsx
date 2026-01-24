@@ -149,7 +149,10 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </li>
               <li className="flex items-start space-x-2">
                 <MapPin className="w-5 h-5 text-white mt-0.5 flex-shrink-0" />
-                <span>Philadelphia, PA</span>
+                <div className="flex flex-col">
+                  <span>1500 Market St, 12th Floor</span>
+                  <span>Philadelphia, PA 19102</span>
+                </div>
               </li>
             </ul>
           </div>
