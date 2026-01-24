@@ -38,7 +38,7 @@ export const Home: React.FC = () => {
                 <span>Boutique Web Development & AI Automation</span>
               </div>
               <div className="relative mb-6">
-                <h1 className="animate-slide-up text-balance relative z-10">
+                <h1 className="animate-slide-up relative z-10">
                   Stop Wasting Your Ad Spend. <br className="hidden sm:inline" />Convert More Leads.
                 </h1>
 

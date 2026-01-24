@@ -103,10 +103,10 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white w-full overflow-x-hidden">
       <SEO />
       <LocalBusinessSchema />
-      <div className="fixed top-0 left-0 right-0 z-50">
+      <div className="fixed top-0 inset-x-0 z-50 w-full overflow-x-hidden">
         <EliteTrustBar />
         <Navigation currentPage={currentPage} onNavigate={handleNavigate} />
       </div>

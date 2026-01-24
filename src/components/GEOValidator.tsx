@@ -116,7 +116,7 @@ export const GEOValidator: React.FC = () => {
             `}</style>
 
             <div className="w-full max-w-2xl mx-auto">
-                <div className="relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl overflow-visible group">
+                <div className="relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl overflow-hidden group">
                     <div className="absolute -top-24 -right-24 w-48 h-48 bg-primary-500/10 rounded-full blur-3xl group-hover:bg-primary-500/20 transition-all duration-700"></div>
 
                     <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
