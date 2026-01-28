@@ -25,6 +25,8 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <img
               src="/ILG_logo_03-27-2023-black.png"
               alt="IntelleadGen Studio"
+              width="170"
+              height="48"
               className="h-10 md:h-12 w-auto mb-4 brightness-0 invert"
             />
             <p className="text-primary-400 text-sm mb-4">

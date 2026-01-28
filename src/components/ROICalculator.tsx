@@ -3,8 +3,9 @@ import { TrendingDown, Clock, DollarSign, AlertTriangle, ArrowRight, Zap } from 
 import { Button } from './Button';
 
 export const ROICalculator: React.FC = () => {
+    const [industry, setIndustry] = useState<'high-ticket' | 'construction'>('high-ticket');
     const [monthlyTraffic, setMonthlyTraffic] = useState<string>('2000');
-    const [avgCustomerValue, setAvgCustomerValue] = useState<string>('3000');
+    const [avgCustomerValue, setAvgCustomerValue] = useState<string>('8000');
     const [monthlyAdSpend, setMonthlyAdSpend] = useState<string>('5000');
     const [showResults, setShowResults] = useState(false);
 
@@ -14,12 +15,12 @@ export const ROICalculator: React.FC = () => {
         const customerValue = parseInt(avgCustomerValue) || 0;
         const adSpend = parseInt(monthlyAdSpend) || 0;
 
-        // Industry benchmarks for Medical/Legal:
-        // - High CPC leads to high cost per acquisition if conversion is low
-        // - Average conversion rate for high-ticket is often lower but value is higher
+        // Brenchmarks:
+        // Construction: Higher ticket, but conversion is often lost to slow "estimate" turnaround
+        // Law/Med: Lost to slow "intake" response
 
         const currentConversion = 0.01; // Poor conversion (1%)
-        const potentialConversion = 0.035; // Optimized (3.5%)
+        const potentialConversion = industry === 'construction' ? 0.045 : 0.035; // Construction often closes higher if response is fast
 
         const currentRevenue = traffic * currentConversion * customerValue;
         const potentialRevenue = traffic * potentialConversion * customerValue;
@@ -79,18 +80,35 @@ export const ROICalculator: React.FC = () => {
                 <div className="text-center mb-12">
                     <div className="inline-flex items-center space-x-2 bg-red-500/10 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium border border-red-500/20 mb-6">
                         <AlertTriangle className="w-4 h-4 text-red-400" />
-                        <span className="text-red-300 font-semibold">Ad Spend Waste Calculator</span>
+                        <span className="text-red-300 font-semibold">Revenue Bleed Calculator</span>
                     </div>
 
                     <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-                        How Much Ad Spend Are You{' '}
+                        How Much Revenue Are You{' '}
                         <span className="bg-gradient-to-r from-red-400 via-orange-400 to-red-500 bg-clip-text text-transparent">
-                            Throwing Away?
+                            Leaving on the Table?
                         </span>
                     </h2>
 
+                    <div className="flex justify-center space-x-4 mb-8">
+                        <button
+                            onClick={() => setIndustry('construction')}
+                            className={`px-6 py-2 rounded-full font-bold transition-all ${industry === 'construction' ? 'bg-white text-black' : 'bg-white/10 text-white hover:bg-white/20'}`}
+                        >
+                            Construction / Remodeling
+                        </button>
+                        <button
+                            onClick={() => setIndustry('high-ticket')}
+                            className={`px-6 py-2 rounded-full font-bold transition-all ${industry === 'high-ticket' ? 'bg-white text-black' : 'bg-white/10 text-white hover:bg-white/20'}`}
+                        >
+                            Medical / Legal
+                        </button>
+                    </div>
+
                     <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                        Medical and Legal practices waste up to 60% of their ad budget on slow follow-up. Let's see your numbers.
+                        {industry === 'construction'
+                            ? "Construction companies lose 50%+ of leads to slow estimate turnarounds. Let's see your potential."
+                            : "Medical and Legal practices waste up to 60% of their ad budget on slow follow-up. Let's see your numbers."}
                     </p>
                 </div>
 
@@ -138,7 +156,7 @@ export const ROICalculator: React.FC = () => {
 
                             <div>
                                 <label className="block text-sm font-bold text-gray-300 mb-2">
-                                    Average Case/Patient Value
+                                    {industry === 'construction' ? 'Monthly Average Project Value' : 'Average Case/Patient Value'}
                                 </label>
                                 <div className="relative">
                                     <div className="absolute left-4 top-1/2 -translate-y-1/2 text-white text-lg font-semibold">
@@ -148,7 +166,7 @@ export const ROICalculator: React.FC = () => {
                                         type="number"
                                         value={avgCustomerValue}
                                         onChange={(e) => setAvgCustomerValue(e.target.value)}
-                                        placeholder="3000"
+                                        placeholder="8000"
                                         className="w-full pl-10 pr-5 py-4 bg-white/10 border-2 border-white/20 rounded-xl focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-all text-white placeholder-gray-500 text-lg font-semibold"
                                     />
                                 </div>
@@ -159,15 +177,15 @@ export const ROICalculator: React.FC = () => {
                                 <ul className="space-y-2 text-xs text-gray-500">
                                     <li className="flex items-start space-x-2">
                                         <span className="text-red-400">•</span>
-                                        <span>60% of leads are lost if not contacted in 5 minutes</span>
+                                        <span>{industry === 'construction' ? '50% of construction leads go cold if not quoted in 24h' : '60% of leads are lost if not contacted in 5 minutes'}</span>
                                     </li>
                                     <li className="flex items-start space-x-2">
                                         <span className="text-red-400">•</span>
-                                        <span>Current conversion rate: 1% (industry average for slow follow-up)</span>
+                                        <span>Current conversion rate: 1% (industry average for manual follow-up)</span>
                                     </li>
                                     <li className="flex items-start space-x-2">
                                         <span className="text-red-400">•</span>
-                                        <span>Potential conversion rate: 3.5%+ (with AI response automation)</span>
+                                        <span>Potential conversion rate: {industry === 'construction' ? '4.5%+' : '3.5%+'} (with HPA automation)</span>
                                     </li>
                                 </ul>
                             </div>
@@ -193,19 +211,21 @@ export const ROICalculator: React.FC = () => {
                                             <div className="text-5xl sm:text-6xl md:text-7xl font-black text-white mb-2">
                                                 {formatCurrency(results.monthlyLoss)}
                                             </div>
-                                            <p className="text-2xl text-red-100 font-semibold uppercase tracking-wider">MONTHLY REVENUE LOST</p>
+                                            <p className="text-2xl text-red-100 font-semibold uppercase tracking-wider">MONTHLY REVENUE BLEED</p>
                                         </div>
 
                                         <div className="bg-black/40 backdrop-blur-md rounded-2xl p-6 mb-6 border border-red-500/30">
                                             <div className="flex items-center justify-between mb-4">
                                                 <div className="flex items-center space-x-2">
                                                     <AlertTriangle className="w-5 h-5 text-red-500" />
-                                                    <span className="text-red-200 text-sm font-bold uppercase tracking-widest">Monthly Ad Waste</span>
+                                                    <span className="text-red-200 text-sm font-bold uppercase tracking-widest">Opportunity Cost</span>
                                                 </div>
                                                 <span className="text-red-500 text-3xl font-black">{formatCurrency(results.adWaste)}</span>
                                             </div>
                                             <p className="text-xs text-red-200 opacity-80 leading-relaxed">
-                                                *Based on 60% lead loss due to industry-average follow-up delays (5+ mins). You are paying for clicks that never reach your intake desk.
+                                                *{industry === 'construction'
+                                                    ? 'Based on 50% lead drop-off due to slow quoting and manual site assessments. Automated estimators keep customers engaged.'
+                                                    : 'Based on 60% lead loss due to industry-average follow-up delays (5+ mins). You are paying for clicks that never reach your intake desk.'}
                                             </p>
                                         </div>
 

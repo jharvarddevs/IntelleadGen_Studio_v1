@@ -33,6 +33,7 @@ This skill defines the requirements for every website developed by IntelleadGen 
 *   **Interactive Hooks:** Every site must have at least one interactive lead qualifier.
     - [ ] `ROICalculator`: Prove value before the pitch.
     - [ ] `LeadMagnetSection`: Multi-channel capture (PDF/Video).
+    - [ ] `HPALivePreview`: Use the `BrowserMockup` component for interactive social proof (embed client sites).
 *   **Mobile Hand-Locking:**
     - [ ] Viewport meta: `shrink-to-fit=no, viewport-fit=cover`.
     - [ ] Root CSS: `overflow-x: hidden`, `width: 100vw`.

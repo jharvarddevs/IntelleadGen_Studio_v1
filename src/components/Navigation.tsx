@@ -15,6 +15,21 @@ export const Navigation: React.FC<NavigationProps> = ({ currentPage, onNavigate 
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const megaMenuRef = useRef<HTMLDivElement>(null);
   const servicesButtonRef = useRef<HTMLDivElement>(null);
+  const closeTimeoutRef = useRef<number | null>(null);
+
+  const handleMouseEnter = () => {
+    if (closeTimeoutRef.current) {
+      window.clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+    setMegaMenuOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    closeTimeoutRef.current = window.setTimeout(() => {
+      setMegaMenuOpen(false);
+    }, 200);
+  };
 
   const services = getAllServices();
 
@@ -71,6 +86,8 @@ export const Navigation: React.FC<NavigationProps> = ({ currentPage, onNavigate 
             <img
               src="/ILG_logo_03-27-2023-black.png"
               alt="IntelleadGen Studio"
+              width="200"
+              height="56"
               className="h-10 md:h-14 w-auto transition-opacity duration-300 group-hover:opacity-80"
             />
           </button>
@@ -81,6 +98,8 @@ export const Navigation: React.FC<NavigationProps> = ({ currentPage, onNavigate 
                 key={item.id}
                 className="relative"
                 ref={item.hasMegaMenu ? servicesButtonRef : null}
+                onMouseEnter={item.hasMegaMenu ? handleMouseEnter : undefined}
+                onMouseLeave={item.hasMegaMenu ? handleMouseLeave : undefined}
               >
                 {item.isExternal ? (
                   <a
@@ -136,7 +155,11 @@ export const Navigation: React.FC<NavigationProps> = ({ currentPage, onNavigate 
         </div>
       </div>
 
-      <div ref={megaMenuRef}>
+      <div
+        ref={megaMenuRef}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
         <MegaMenu
           isOpen={megaMenuOpen}
           onNavigate={onNavigate}

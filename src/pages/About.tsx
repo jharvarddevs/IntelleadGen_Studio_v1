@@ -1,7 +1,8 @@
 import React from 'react';
 import { Button } from '../components/Button';
 import { Section, SectionHeader } from '../components/Section';
-import { Heart, Target, Users, Zap, Code, Sparkles, ExternalLink, Rocket } from 'lucide-react';
+import { Heart, Target, Users, Zap, Code, ExternalLink, Rocket } from 'lucide-react';
+import { FounderAuthority } from '../components/FounderAuthority';
 
 export const About: React.FC = () => {
   return (
@@ -15,37 +16,7 @@ export const About: React.FC = () => {
         </div>
       </section>
 
-      <Section>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="bg-secondary-100 rounded-2xl p-12 flex items-center justify-center h-96">
-            <div className="text-center text-secondary-400">
-              <Sparkles className="w-24 h-24 mx-auto mb-4" />
-              <p className="text-lg">Founder Photo</p>
-            </div>
-          </div>
-          <div>
-            <h2 className="mb-6">Our Story</h2>
-            <p className="text-lg text-secondary-600 mb-4 leading-relaxed">
-              IntelleadGen Studio was born from a simple observation: successful business owners
-              were drowning in tech complexity when all they needed was something that worked.
-            </p>
-            <p className="text-lg text-secondary-600 mb-4 leading-relaxed">
-              We saw medical professionals, lawyers, and entrepreneurs spending thousands on
-              cookie-cutter websites that didn't convert. They were promised "easy" solutions that
-              turned into maintenance nightmares.
-            </p>
-            <p className="text-lg text-secondary-600 mb-4 leading-relaxed">
-              So we created something different: a boutique studio that combines beautiful design,
-              cutting-edge technology, and genuine partnership. We don't just build websites. We
-              build growth engines.
-            </p>
-            <p className="text-lg text-secondary-600 leading-relaxed">
-              Every project gets our full attention. Every client gets direct access to our team.
-              No project managers. No runaround. Just results.
-            </p>
-          </div>
-        </div>
-      </Section>
+      <FounderAuthority />
 
       <Section background="gray">
         <SectionHeader

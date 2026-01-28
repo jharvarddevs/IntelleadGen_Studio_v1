@@ -13,6 +13,7 @@ import { OnboardingPortal } from './pages/OnboardingPortal';
 import { SEO } from './components/SEO';
 import { LocalBusinessSchema } from './components/LocalBusinessSchema';
 import { EliteTrustBar } from './components/EliteTrustBar';
+import { ChatWidget } from './components/ChatWidget';
 import { getServiceBySlug } from './lib/servicesData';
 import { trackEvent } from './lib/supabase';
 
@@ -106,10 +107,11 @@ function App() {
     <div className="min-h-screen bg-white w-full overflow-x-hidden">
       <SEO />
       <LocalBusinessSchema />
-      <div className="fixed top-0 inset-x-0 z-50 w-full overflow-x-hidden">
+      <div className="fixed top-0 inset-x-0 z-50 w-full">
         <EliteTrustBar />
         <Navigation currentPage={currentPage} onNavigate={handleNavigate} />
       </div>
+      <ChatWidget />
       <main className="pt-[104px] md:pt-[128px]">{renderPage()}</main>
       <Footer onNavigate={handleNavigate} />
     </div>

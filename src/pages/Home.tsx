@@ -3,17 +3,24 @@ import { Button } from '../components/Button';
 import { Section, SectionHeader } from '../components/Section';
 import { ServiceCard } from '../components/ServiceCard';
 import { TestimonialCard } from '../components/TestimonialCard';
-import { FloatingActionButton } from '../components/FloatingActionButton';
 import { LeadMagnetSection } from '../components/LeadMagnetSection';
 import { ROICalculator } from '../components/ROICalculator';
 import { SuccessRoadmap } from '../components/SuccessRoadmap';
 import { SEO } from '../components/SEO';
-import { Zap, TrendingUp, Palette, Clock, Award, Users, ArrowRight, CheckCircle, MessageCircle, ExternalLink, Sparkles } from 'lucide-react';
+import { Zap, TrendingUp, Palette, Clock, Award, Users, ArrowRight, CheckCircle, ExternalLink, Sparkles } from 'lucide-react';
 import { GEOValidator } from '../components/GEOValidator';
 import { HPAPhaseShift } from '../components/HPAPhaseShift';
 import { ServiceArea } from '../components/ServiceArea';
+import { ConstructionEstimator } from '../components/ConstructionEstimator';
+import { MedSpaConsultant } from '../components/MedSpaConsultant';
+import { LegalCaseValidator } from '../components/LegalCaseValidator';
+import { RoofingEstimator } from '../components/RoofingEstimator';
+import { Construction, Scale, Umbrella } from 'lucide-react';
+import { BrowserMockup } from '../components/BrowserMockup';
 
 export const Home: React.FC = () => {
+  const [selectedIndustry, setSelectedIndustry] = React.useState<'construction' | 'medspa' | 'legal' | 'roofing'>('construction');
+
   return (
     <>
       <SEO
@@ -21,13 +28,7 @@ export const Home: React.FC = () => {
         description="Boutique web development and AI automation for high-income business owners. We build beautiful, AI-powered websites that generate leads and boost local SEO."
         canonical="https://intelleadgen.io/studio"
       />
-      <FloatingActionButton
-        icon={MessageCircle}
-        href="#contact"
-        label="Book a Discovery Call"
-        position="bottom-right"
-        showAfterScroll={300}
-      />
+
       <div className="pt-0">
         <section className="relative bg-gradient-to-br from-secondary-50 via-white to-primary-50 overflow-hidden pt-8 md:pt-12 pb-20 md:pb-32">
           <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
@@ -82,7 +83,7 @@ export const Home: React.FC = () => {
                 </div>
               </div>
               <p className="text-xl md:text-2xl text-secondary-600 mb-10 leading-relaxed max-w-3xl mx-auto animate-slide-up">
-                We build high-performance lead systems for Medical & Legal practices that stop the "leaky bucket" and turn traffic into profit.
+                We build high-performance lead systems for **Construction, Medical, and Legal** practices that stop the "leaky bucket" and turn traffic into profit.
               </p>
 
 
@@ -121,8 +122,8 @@ export const Home: React.FC = () => {
             </div>
             <h2 className="mb-6">You're Paying for Clicks. <br />Are You Actually Converting Them?</h2>
             <p className="text-lg text-secondary-600 mb-12">
-              The average MedSpa or Law Firm loses <strong>60% of their leads</strong> due to slow follow-up and confusing websites.
-              If a lead doesn't get a response in 5 minutes, your competition already has them.
+              The average **High-Ticket Service Business** loses **60% of their leads** due to slow follow-up and confusing websites.
+              If a lead doesn't get a response in 5 minutes (or 24 hours for construction quotes), your competition already has them.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="p-6 bg-white rounded-xl shadow-md border-t-4 border-red-500">
@@ -224,6 +225,8 @@ export const Home: React.FC = () => {
 
         <ServiceArea />
 
+
+
         <Section background="dark" id="roadmap">
           <SectionHeader
             title="The HPA Evolution"
@@ -304,25 +307,89 @@ export const Home: React.FC = () => {
           </div>
         </Section>
 
+        <Section id="industry-tools" background="gray">
+          <SectionHeader
+            title="Industry Specific Tools"
+            subtitle="See how our HPA components convert smarter for specialized trades"
+            centered
+          />
+
+          <div className="mt-12">
+            {/* Industry Tab Switcher */}
+            <div className="flex flex-wrap justify-center gap-4 mb-16">
+              {[
+                { id: 'construction', label: 'Construction', icon: Construction },
+                { id: 'roofing', label: 'Roofing', icon: Umbrella },
+                { id: 'medspa', label: 'MedSpa', icon: Sparkles },
+                { id: 'legal', label: 'Legal', icon: Scale },
+              ].map((industry) => (
+                <button
+                  key={industry.id}
+                  onClick={() => setSelectedIndustry(industry.id as any)}
+                  className={`flex items-center space-x-3 px-8 py-4 rounded-2xl font-bold transition-all duration-300 ${selectedIndustry === industry.id
+                    ? 'bg-black text-white shadow-xl scale-105'
+                    : 'bg-white text-secondary-600 hover:bg-gray-50 border border-gray-100'
+                    }`}
+                >
+                  <industry.icon className={`w-5 h-5 ${selectedIndustry === industry.id ? 'text-primary-400' : 'text-secondary-400'}`} />
+                  <span>{industry.label}</span>
+                </button>
+              ))}
+            </div>
+
+            <div className="animate-in fade-in slide-in-from-bottom-8 duration-700">
+              {selectedIndustry === 'construction' && (
+                <>
+                  <h3 className="text-center text-sm font-black uppercase tracking-[0.3em] text-secondary-400 mb-10">Live Demo: Multi-Trade Project Estimator</h3>
+                  <ConstructionEstimator />
+                </>
+              )}
+              {selectedIndustry === 'medspa' && (
+                <>
+                  <h3 className="text-center text-sm font-black uppercase tracking-[0.3em] text-secondary-400 mb-10">Live Demo: Aesthetic Consultant</h3>
+                  <MedSpaConsultant />
+                </>
+              )}
+              {selectedIndustry === 'roofing' && (
+                <>
+                  <h3 className="text-center text-sm font-black uppercase tracking-[0.3em] text-secondary-400 mb-10">Live Demo: Roofing Quote System</h3>
+                  <RoofingEstimator />
+                </>
+              )}
+              {selectedIndustry === 'legal' && (
+                <>
+                  <h3 className="text-center text-sm font-black uppercase tracking-[0.3em] text-secondary-400 mb-10">Live Demo: Case Strength Validator</h3>
+                  <LegalCaseValidator />
+                </>
+              )}
+            </div>
+          </div>
+        </Section>
+
         <Section id="case-study">
-          <div className="bg-gradient-to-br from-primary-600 to-primary-800 rounded-2xl overflow-hidden shadow-2xl">
-            <div className="grid grid-cols-1 lg:grid-cols-2">
-              <div className="p-8 md:p-12 lg:p-16 text-white">
-                <div className="inline-block bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium mb-6">
+          <div className="relative bg-[#020617] rounded-[2rem] overflow-hidden shadow-2xl border border-white/10">
+            {/* Elite Aesthetic Background Elements */}
+            <div className="absolute inset-0 bg-grid-white/[0.02] bg-[length:32px_32px]"></div>
+            <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-96 h-96 bg-primary-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+            <div className="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-96 h-96 bg-primary-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+            <div className="relative grid grid-cols-1 lg:grid-cols-2">
+              <div className="p-8 md:p-12 lg:p-16 text-white backdrop-blur-sm bg-white/[0.01]">
+                <div className="inline-block bg-primary-500/20 backdrop-blur-md border border-primary-500/30 px-4 py-2 rounded-full text-xs font-bold tracking-widest uppercase mb-6 text-primary-300">
                   Case Study
                 </div>
-                <h2 className="text-white mb-6">How a Philadelphia Nonprofit Now Serves 1,000+ Families Monthly</h2>
-                <p className="text-primary-100 text-lg mb-8 leading-relaxed">
+                <h2 className="text-white mb-6 leading-tight">How a Philadelphia Nonprofit Now Serves 1,000+ Families Monthly</h2>
+                <p className="text-secondary-300 text-lg mb-8 leading-relaxed">
                   The Acts Foundation needed a professional online presence to accept donations, recruit volunteers, and share their impact story. We built them a mission-focused website that helps fight food insecurity in Philadelphia.
                 </p>
                 <div className="grid grid-cols-2 gap-6 mb-8">
                   <div>
-                    <div className="text-4xl font-bold mb-2">1,000+</div>
-                    <p className="text-primary-100">Families Served Monthly</p>
+                    <div className="text-4xl font-bold mb-2 text-primary-400">1,000+</div>
+                    <p className="text-secondary-400 text-sm">Families Served Monthly</p>
                   </div>
                   <div>
-                    <div className="text-4xl font-bold mb-2">100%</div>
-                    <p className="text-primary-100">Impact-Driven Design</p>
+                    <div className="text-4xl font-bold mb-2 text-primary-400">100%</div>
+                    <p className="text-secondary-400 text-sm">Impact-Driven Design</p>
                   </div>
                 </div>
                 <Button variant="secondary" size="lg" href="https://theactsfoundation.org/" target="_blank" rel="noopener noreferrer">
@@ -330,11 +397,11 @@ export const Home: React.FC = () => {
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Button>
               </div>
-              <div className="h-64 lg:h-auto bg-primary-700/30 flex items-center justify-center">
-                <div className="text-center text-white/60">
-                  <Users className="w-20 h-20 mx-auto mb-4" />
-                  <p>Nonprofit Website</p>
-                </div>
+              <div className="h-96 lg:h-auto bg-black/40 p-4 lg:p-8 backdrop-blur-sm">
+                <BrowserMockup
+                  url="https://theactsfoundation.org/"
+                  className="h-full min-h-[400px] shadow-2xl"
+                />
               </div>
             </div>
           </div>
@@ -377,12 +444,11 @@ export const Home: React.FC = () => {
                     <ExternalLink className="w-4 h-4" />
                   </a>
                 </div>
-                <div className="bg-primary-100/50 p-8 md:p-12 flex items-center justify-center">
-                  <div className="text-center text-primary-700">
-                    <Zap className="w-20 h-20 mx-auto mb-4" />
-                    <p className="font-medium text-lg">intelleadgen.io</p>
-                    <p className="text-sm text-primary-600 mt-2">Self-Service Lead Gen Platform</p>
-                  </div>
+                <div className="bg-primary-100/30 p-4">
+                  <BrowserMockup
+                    url="https://intelleadgen.io"
+                    className="h-full min-h-[400px]"
+                  />
                 </div>
               </div>
             </div>

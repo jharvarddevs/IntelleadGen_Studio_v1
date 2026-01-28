@@ -147,6 +147,8 @@ export const GEOValidator: React.FC = () => {
                                     <img
                                         src="https://z-cdn-media.chatglm.cn/files/638f1f49-a60c-4dd4-a22e-a4f71604e484.png?auth_key=1866470619-c47401d44b2d4fa5ab16b754f651c2a8-0-65e27844d139175a8ca88fefecd4b8d2"
                                         alt="GEO Network Icon"
+                                        width="24"
+                                        height="24"
                                         className="w-6 h-6 object-contain"
                                     />
                                 </div>
