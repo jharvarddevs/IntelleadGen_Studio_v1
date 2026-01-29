@@ -14,6 +14,7 @@ import { SEO } from './components/SEO';
 import { LocalBusinessSchema } from './components/LocalBusinessSchema';
 import { EliteTrustBar } from './components/EliteTrustBar';
 import { ChatWidget } from './components/ChatWidget';
+import { VisitorTrustNotification } from './components/VisitorTrustNotification';
 import { getServiceBySlug } from './lib/servicesData';
 import { trackEvent } from './lib/supabase';
 
@@ -112,6 +113,7 @@ function App() {
         <Navigation currentPage={currentPage} onNavigate={handleNavigate} />
       </div>
       <ChatWidget />
+      <VisitorTrustNotification />
       <main className="pt-[104px] md:pt-[128px]">{renderPage()}</main>
       <Footer onNavigate={handleNavigate} />
     </div>
