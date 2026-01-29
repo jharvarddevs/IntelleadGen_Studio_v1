@@ -3,6 +3,7 @@ import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 const corsHeaders = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
 }
 
 const SYSTEM_PROMPT = `
@@ -52,37 +53,38 @@ Deno.serve(async (req) => {
     }
 
     try {
+        console.log(`[Chat Assistant] Request received. Method: ${req.method}, Origin: ${req.headers.get('origin')}`);
+
         const { messages } = await req.json()
         const apiKey = Deno.env.get('GEMINI_API_KEY')
 
         if (!apiKey) {
+            console.error('[Chat Assistant] GEMINI_API_KEY is not set');
             throw new Error('GEMINI_API_KEY not set in Supabase Secrets')
         }
 
-        // Prepare the messages for Gemini
-        const contents = [
-            {
-                role: "user",
-                parts: [{ text: SYSTEM_PROMPT }]
-            },
-            ...messages.map((msg: any) => ({
+        // Prepare the messages for Gemini using system_instruction
+        // or ensure alternating user/model roles.
+        const body = {
+            contents: messages.map((msg: any) => ({
                 role: msg.role === 'assistant' ? 'model' : 'user',
                 parts: [{ text: msg.content }]
-            }))
-        ]
+            })),
+            systemInstruction: {
+                parts: [{ text: SYSTEM_PROMPT }]
+            },
+            generationConfig: {
+                temperature: 0.7,
+                maxOutputTokens: 800,
+            }
+        }
 
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-                contents,
-                generationConfig: {
-                    temperature: 0.7,
-                    maxOutputTokens: 800,
-                }
-            })
+            body: JSON.stringify(body)
         })
 
         const data = await response.json()
@@ -103,8 +105,12 @@ Deno.serve(async (req) => {
         )
 
     } catch (error) {
+        console.error('[Chat Assistant] Error details:', error);
         return new Response(
-            JSON.stringify({ error: error instanceof Error ? error.message : 'Unknown error' }),
+            JSON.stringify({
+                error: error instanceof Error ? error.message : 'Unknown error',
+                details: error instanceof Error ? error.stack : undefined
+            }),
             {
                 headers: { ...corsHeaders, 'Content-Type': 'application/json' },
                 status: 500

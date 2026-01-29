@@ -43,11 +43,20 @@ export const ChatWidget: React.FC = () => {
                 body: { messages: [...messages, userMessage] }
             });
 
-            if (error) throw error;
+            if (error) {
+                console.error('[Chat Widget] Edge Function Error:', error);
+                throw error;
+            }
 
             setMessages(prev => [...prev, { role: 'assistant', content: data.content }]);
         } catch (error: any) {
-            console.error('Chat Assistant Error:', error);
+            console.error('[Chat Widget] Unexpected Error:', {
+                message: error.message,
+                details: error.details,
+                hint: error.hint,
+                code: error.code,
+                stack: error.stack
+            });
             setMessages(prev => [...prev, {
                 role: 'assistant',
                 content: "I'm sorry, I'm having trouble connecting to my knowledge base right now. Please try again or book a discovery call for expert advice."

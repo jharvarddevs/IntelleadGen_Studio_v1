@@ -12,6 +12,7 @@ Achieve 100 Performance | Dominate Map Pack | 15% Conversion
 - [ ] SAB Schema Deployed (Philadelphia focus)
 - [ ] Will-Change applied to hero animations
 - [ ] Edge Analytics tracking lead events
+- [ ] AI Model Verification (Most available & compatible version)
 
 ## 3. Local SEO Protocol
 - [ ] Target Area: Philadelphia & Horsham

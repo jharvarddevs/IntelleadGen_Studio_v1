@@ -41,6 +41,7 @@ This skill defines the requirements for every website developed by IntelleadGen 
 ## 5. Analytics & Reliability
 *   **Edge Tracking:** Integrate Supabase Edge Functions for real-time lead tracking.
 *   **Resilient Init:** Wrap all third-party SDKs (Supabase, Analytics) in `try-catch` blocks to prevent "White Screen of Death."
+*   **AI Model Orchestration:** Always use the most available and compatible Gemini model version (e.g., preference for `gemini-2.0-flash` over legacy `1.5` versions in newer projects).
 
 ---
 
